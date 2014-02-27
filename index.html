@@ -28,7 +28,8 @@
         </div>
     </div>
 </div>
-<div class="hs-doc-marquee"><div class="hs-page-width-normal"><div class="row-fluid"><div class="span6"><h1>offline</h1><h3 class="hs-doc-marquee-description">Automatically detect when a browser is offline</h3><p class="hs-doc-marquee-release">0.5.0</p><p class="hs-doc-marquee-stars"><iframe src="http://ghbtns.com/github-btn.html?user=HubSpot&repo=offline&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="240" height="30"></iframe></p></div><div class="span6"><div class="hs-doc-marquee-buttons"><a class="hs-doc-marquee-button" href="http://github.com/HubSpot/offline">Star on GitHub</a><a class="hs-doc-marquee-button" href="http://github.com/HubSpot/offline/archive/v0.5.0.zip">Download ZIP (v0.5.0)</a></div></div></div></div></div><div class="hs-page-width-normal"><div class="row-fluid"><div class="span3"><div class="hs-doc-sidenav"><nav><ul class="hs-public-sidenav"><li class="current-nav-item"><a href="">Home</a></li></ul></nav></div></div><div class="span9"><div class="hs-doc-content"><h1 id="offline">Offline</h1>
+<div class="hs-doc-marquee"><div class="hs-page-width-normal"><div class="row-fluid"><div class="span6"><h1>offline</h1><h3 class="hs-doc-marquee-description">Automatically detect when a browser is offline</h3><p class="hs-doc-marquee-release">0.7.0</p><p class="hs-doc-marquee-stars"><iframe src="http://ghbtns.com/github-btn.html?user=HubSpot&repo=offline&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="240" height="30"></iframe></p></div><div class="span6"><div class="hs-doc-marquee-buttons"><a class="hs-doc-marquee-button" href="http://github.com/HubSpot/offline">Star on GitHub</a><a class="hs-doc-marquee-button" href="http://github.com/HubSpot/offline/archive/v0.7.0.zip">Download ZIP (v0.7.0)</a></div></div></div></div></div><div class="hs-page-width-normal"><div class="row-fluid"><div class="span3"><div class="hs-doc-sidenav"><nav><ul class="hs-public-sidenav"><li class="current-nav-item"><a href="">Home</a></li></ul></nav></div></div><div class="span9"><div class="hs-doc-content"><h1 id="offline">Offline</h1>
+<p><strong>Note to users pre-0.6.0:  Offline previously used a cloudfront hosted file as one of it&#39;s methods of detecting the connection status.  This method is now deprecated.  If your app is getting cloudfront 404s, please upgrade to Offline 0.6.0.</strong></p>
 <p>Improve the experience of your app when your users lose connection.</p>
 <ul>
 <li>Monitors ajax requests looking for failure</li>
@@ -61,7 +62,7 @@ bringing in the script.</p>
   },
 
   <span class="comment">// Should we store and attempt to remake requests which fail while the connection is down.</span>
-  requests: <span class="literal">true</span>
+  requests: <span class="literal">true</span>,
 
   <span class="comment">// Should we show a snake game while the connection is down to keep the user entertained?</span>
   <span class="comment">// It's not included in the normal build, you should bring in js/snake.js in addition to</span>
@@ -88,13 +89,10 @@ bringing in the script.</p>
 </ul>
 <p><code>Offline.off(event, handler)</code>: Unbind an event</p>
 <h2 id="checking">Checking</h2>
-<p>Offline ships with two methods for checking the connection.  One makes a request for a tiny image hosted on a
-cloudfront account for the benevolence of all, the other makes an XHR request against the current domain,
-hoping to get back any sort of response (even a 404).</p>
-<p>You can change the url of the image to be one you control, if you like:</p>
+<p>Offline ships with two methods for checking the connection.  One makes a request for your <code>/favicon.ico</code> file
+, the other makes an XHR request against the current domain, hoping to get back any sort of response (even a 404).</p>
+<p>You can change the url of the image, if you like:</p>
 <pre><code class="lang-javascript">Offline.options = {checks: {image: {url: <span class="string">'my-image.gif'</span>}}};</code></pre>
-<p>Loading an image was chosen (rather than a script file), because it limits the potential damage if a
-hostile party were to be in control of it.</p>
 <p>You can also switch to the XHR method:</p>
 <pre><code class="lang-javascript">Offline.options = {checks: {active: <span class="string">'xhr'</span>}}</code></pre>
 <p>The XHR method is not enabled by default because of a concern that some sites do a significant amount of
